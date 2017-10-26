@@ -48,4 +48,4 @@ Standing,Resting,Moving,Eating,Interacting,Babies
 from table4
 order by CaptureEventID,ClassificationID;
 
-select * from table5;
+select * from table5 limit 100;

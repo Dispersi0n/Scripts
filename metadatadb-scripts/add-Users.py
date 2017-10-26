@@ -12,13 +12,19 @@ if len(sys.argv) < 2 :
     exit(1)
 
 infilename = sys.argv[1]
+mysqlhost = sys.argv[2]
+mysqluser = sys.argv[3]
+mysqlpass = sys.argv[4]
+mysqldb = sys.argv[5]
+name = sys.argv[6]
 
 try:
     # connect to the database
-    db = MySQLdb.connect(host="mysql.msi.umn.edu",
-                         user="kosmala",
-                         passwd="uvNaui5sg",
-                         db="packerc_snapshot_serengeti")
+    db = MySQLdb.connect(host=mysqlhost,
+                         user=mysqluser,
+                         passwd=mysqlpass,
+                         db=mysqldb,
+                         local_infile=1)
 
     # open up the file
     infile = open(infilename,'rb')
@@ -42,7 +48,7 @@ try:
                 snapshotDB.addUser(uname,uhash)
                 
         # make a note in the log
-        snapshotDB.log("Margaret Kosmala",
+        snapshotDB.log(name,
                        "Added users from file " +
                        str(infilename))
  

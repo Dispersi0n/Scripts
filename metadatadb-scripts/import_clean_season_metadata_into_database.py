@@ -53,10 +53,11 @@ with open(authfilename,'rb') as afile:
 
 try:
     # connect to the database    
-    db = MySQLdb.connect(host="mysql.msi.umn.edu",
+    db = MySQLdb.connect(host="localhost",
                          user=username,
                          passwd=password,
-                         db="packerc_snapshot_serengeti")
+                         db="packerc_snapshot_serengeti",
+                         local_infile = 1)
 
     # use the database
     with db:

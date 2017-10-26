@@ -13,6 +13,10 @@ if len(sys.argv) < 3 :
 
 infilename = sys.argv[1]
 outfilename = sys.argv[2]
+mysqlhost = sys.argv[3]
+mysqluser = sys.argv[4]
+mysqlpass = sys.argv[5]
+mysqldb = sys.argv[6]
 
 # create dictionary for species
 # hard-coded for speed
@@ -76,10 +80,11 @@ userDict = dict()
 
 try:
     # connect to the database
-    db = MySQLdb.connect(host="mysql.msi.umn.edu",
-                         user="kosmala",
-                         passwd="uvNaui5sg",
-                         db="packerc_snapshot_serengeti")
+    db = MySQLdb.connect(host=mysqlhost,
+                         user=mysqluser,
+                         passwd=mysqlpass,
+                         db=mysqldb,
+                         local_infile=1)
 
     # open up the file
     infile = open(infilename,'rb')

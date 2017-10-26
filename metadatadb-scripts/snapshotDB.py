@@ -19,7 +19,7 @@ def log(name,comments):
     # if that person isn't in the table, add it
     if result == None:
         print ("Person: " + name + " is not in People table. Adding person.")
-        addPerson(name)
+        addPerson(name,"XX")
         command = "SELECT idPeople FROM People WHERE Name=\"" + name + "\""
         execute(command)
         result = cur.fetchone()
@@ -381,7 +381,8 @@ def addConsensusBlanks(afile):
                "`ZoonID` VARCHAR(10) NOT NULL," +
                "`Retire` VARCHAR(16) NOT NULL," +
                "`NumClass` INT NOT NULL," +
-               "`NumBlanks` INT NOT NULL)" +
+               "`NumBlanks` INT NOT NULL," +
+               "INDEX(ZoonID))" +
                "ENGINE = InnoDB;")
     execute(command)
 
@@ -430,7 +431,8 @@ def addConsensusClassifications(afile):
                "`Move` DOUBLE NOT NULL," +
                "`Eat` DOUBLE NOT NULL," +
                "`Interact` DOUBLE NOT NULL," +
-               "`Baby` DOUBLE NOT NULL) " +
+               "`Baby` DOUBLE NOT NULL, " +
+               "INDEX(ZoonID))" +
                "ENGINE = InnoDB;")
     execute(command)
 
@@ -778,7 +780,7 @@ def siteExists(gridcell):
 def exportSeasonCaptureEvents(season):
     "Creates a file with season,site,roll,capture,image info for a season"
 
-    command = ("SELECT idCaptureEvent,Season,GridCell,RollNumber," +
+    command = ("SELECT DISTINCT idCaptureEvent,Season,GridCell,RollNumber," +
                "CaptureEventNum,SequenceNum,PathFilename FROM Sites " +
                "JOIN Rolls ON Rolls.Site=Sites.idSite " +
                "JOIN CaptureEvents ON CaptureEvents.Roll=Rolls.idRoll " +

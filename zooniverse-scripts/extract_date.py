@@ -37,7 +37,7 @@ for dirname, dirnames, filenames in os.walk(basedir):
     #  path to all files within the base ## whichever directory in ## directory
     for filename in filenames:
         fileLoc = os.path.join(dirname, filename)	
-
+        #print "Working on: "+ fileLoc + "\n"
         # check that the file is .JPG
 	rhs=""
 	if "." in filename:	
@@ -63,8 +63,10 @@ for dirname, dirnames, filenames in os.walk(basedir):
             except IOError:
                 errfile.write("Cannot open file: " + fileLoc + "\n")
             else:
-                exif = img._getexif()
- 
+                try:
+                    exif = img._getexif()
+                except:
+                    print "Exif is broken at: " + fileLoc + "\n"
                 # deal with empty exif
                 if (exif==None):
                     errfile.write("No EXIF data: " + fileLoc + "\n")
