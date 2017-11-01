@@ -1701,104 +1701,104 @@ def speciesCount(inFilename,outFilename):
 #---------------------------------------- MAIN --------------------------------------
 
 #Connect to MSI
-# authenticationFileNeeded = raw_input("Have you already built an authentication file? (y for Yes, n for No): ")
-# if authenticationFileNeeded == 'n':
-# 	print "Creating authentication file"
-# 	createAuthenticationFile(msiUserName,dbPasswd)
-# 	print "Authentication file created."
+authenticationFileNeeded = raw_input("Have you already built an authentication file? (y for Yes, n for No): ")
+if authenticationFileNeeded == 'n':
+	print "Creating authentication file"
+	createAuthenticationFile(msiUserName,dbPasswd)
+	print "Authentication file created."
 
-# os.chdir("/Users/Axl/Desktop/SerengetiPart2/metadata/seasons_files")
+os.chdir("/Users/Axl/Desktop/SerengetiPart2/metadata/seasons_files")
 
 print "Filtering snapshot file to current season"
-#filterSnapshot(snapshotFilePath,classificationsPath+"/Zooniverse_downloads/S"+seasonNbr+"_filteringtemp.csv",seasonNbr)
-filterSnapshot("/Users/Axl/Desktop/SerengetiPart2/classifications_data/Zooniverse_downloads/snapshot_S1-9_original.csv","/Users/Axl/Desktop/SerengetiPart2/classifications_data/testfilter.csv",9)
+filterSnapshot(snapshotFilePath,classificationsPath+"/Zooniverse_downloads/S"+seasonNbr+"_filteringtemp.csv",seasonNbr)
+#filterSnapshot("/Users/Axl/Desktop/SerengetiPart2/classifications_data/Zooniverse_downloads/snapshot_S1-9_original.csv","/Users/Axl/Desktop/SerengetiPart2/classifications_data/testfilter.csv",9)
 print "Snapshot file has been filtered."
 
-# print "Creating metadata file for season "+seasonNbr
-# createMetadataFile(seasonNbr)
-# print "Metadata file for season "+seasonNbr+" created."
+print "Creating metadata file for season "+seasonNbr
+createMetadataFile(seasonNbr)
+print "Metadata file for season "+seasonNbr+" created."
 
-# print "Uploading image metadata for season "+seasonNbr
-# uploadImageMetadata(seasonNbr,msiUserName)
-# print "Metadata upload complete."
+print "Uploading image metadata for season "+seasonNbr
+uploadImageMetadata(seasonNbr,msiUserName)
+print "Metadata upload complete."
 
-# print "Setting roll up times"
-# setRollUpTimes(msiUserName,dbPasswd,fullName)
-# print "Roll up times set in SQL database."
+print "Setting roll up times"
+setRollUpTimes(msiUserName,dbPasswd,fullName)
+print "Roll up times set in SQL database."
 
-# print "Extracting classifications for capture events containing animals"
-# extractNonEmptySubjects(snapshotFilePath,nonEmptyPath)
-# print "Classifications extracted."
+print "Extracting classifications for capture events containing animals"
+extractNonEmptySubjects(snapshotFilePath,nonEmptyPath)
+print "Classifications extracted."
 
-# print "Preparing season for analysis.."
-# os.chdir(classificationsPath)
-# prepSeason(seasonNbr,nonEmptyPath)
-# print "Season prepared."
+print "Preparing season for analysis.."
+os.chdir(classificationsPath)
+prepSeason(seasonNbr,nonEmptyPath)
+print "Season prepared."
 
-# print "Moving season csv to non-blank classifications folder..."
-# old_path = classificationsPath+"/season_"+seasonNbr+".csv"
-# new_path = classificationsPath+"/non-blank_classifications/season_"+seasonNbr+".csv"
-# os.rename(old_path,new_path)
-# #os.rename(classificationsPath+"/season_"+seasonNbr+".csv",classificationsPath+"/non-blank_classifications/"+"season_"+seasonNbr+".csv")
+print "Moving season csv to non-blank classifications folder..."
+old_path = classificationsPath+"/season_"+seasonNbr+".csv"
+new_path = classificationsPath+"/non-blank_classifications/season_"+seasonNbr+".csv"
+os.rename(old_path,new_path)
+#os.rename(classificationsPath+"/season_"+seasonNbr+".csv",classificationsPath+"/non-blank_classifications/"+"season_"+seasonNbr+".csv")
 
-# print "Anonymizing users.."
-# os.chdir(sharedDir)
-# createUsersHashTable(snapshotFilePath,userHashPath)
-# print "Users anonymized."
+print "Anonymizing users.."
+os.chdir(sharedDir)
+createUsersHashTable(snapshotFilePath,userHashPath)
+print "Users anonymized."
 
-# print "Calculating consensus vote"
-# getPluralityConsensus(nonBlankPath+"/season_"+seasonNbr+".csv",consensusPath+"/season_"+seasonNbr+"_plurality.csv")
-# print "Consensus calculated"
+print "Calculating consensus vote"
+getPluralityConsensus(nonBlankPath+"/season_"+seasonNbr+".csv",consensusPath+"/season_"+seasonNbr+"_plurality.csv")
+print "Consensus calculated"
 
-# print "Getting blank capture events"
-# os.chdir(classificationsPath)
-# getBlankCaptures(snapshotFilePath,consensusPath+"/season_"+seasonNbr+"_blanks.csv")
-# print "Blank capture events recorded."
+print "Getting blank capture events"
+os.chdir(classificationsPath)
+getBlankCaptures(snapshotFilePath,consensusPath+"/season_"+seasonNbr+"_blanks.csv")
+print "Blank capture events recorded."
 
-# print "Comparing capture events in SSDB to Zooniverse"
-# print "Season number is: "+seasonNbr
-# print "Exporting season to file..."
-# exportSeason(seasonNbr,sharedDir+"/data/link_to_zoon_id/S"+seasonNbr+"_db_captures.csv")
-# print "Season has been exported."
-# os.chdir(classificationsPath)
+print "Comparing capture events in SSDB to Zooniverse"
+print "Season number is: "+seasonNbr
+print "Exporting season to file..."
+exportSeason(seasonNbr,sharedDir+"/data/link_to_zoon_id/S"+seasonNbr+"_db_captures.csv")
+print "Season has been exported."
+os.chdir(classificationsPath)
 
-#snapshotCaptureExtract(classificationsPath+"/Zooniverse_downloads/snapshot_S"+seasonNbr+".csv",classificationsPath+"/capture_to_ZoonID/snapshot_S"+seasonNbr+"_unique_captures.csv")
+snapshotCaptureExtract(classificationsPath+"/Zooniverse_downloads/snapshot_S"+seasonNbr+".csv",classificationsPath+"/capture_to_ZoonID/snapshot_S"+seasonNbr+"_unique_captures.csv")
 
-# compareCaptures(sharedDir+"/data/link_to_zoon_id/S"+seasonNbr+"_db_captures.csv"
-#  						,classificationsPath+"/capture_to_ZoonID/snapshot_S"+seasonNbr+"_unique_captures.csv"
-#  						,sharedDir+"/data/link_to_zoon_id/S"+seasonNbr+"_links.csv")
-# print "SSDB has been compared to Zooniverse"
+compareCaptures(sharedDir+"/data/link_to_zoon_id/S"+seasonNbr+"_db_captures.csv"
+ 						,classificationsPath+"/capture_to_ZoonID/snapshot_S"+seasonNbr+"_unique_captures.csv"
+ 						,sharedDir+"/data/link_to_zoon_id/S"+seasonNbr+"_links.csv")
+print "SSDB has been compared to Zooniverse"
 
-#print "Adding new users to the database"
-#addUsers(sharedDir+"/data/users/S"+seasonNbr+"_hashes_all_users.csv")
-#scriptsPath = '/Users/Axl/Desktop/SerengetiPart2/scripts'
-#os.chdir(scriptsPath)
-#os.system("./add-Users.py ../data/users/S"+seasonNbr+"_hashes_all_users.csv "+mySqlHost+" "+msiUserName+" "+dbPasswd+" "+mySqlSchema+" "+fullName+" > ../data/users/upload_log_S"+seasonNbr+".txt")
-#print "New users added"
+print "Adding new users to the database"
+addUsers(sharedDir+"/data/users/S"+seasonNbr+"_hashes_all_users.csv")
+scriptsPath = '/Users/Axl/Desktop/SerengetiPart2/scripts'
+os.chdir(scriptsPath)
+os.system("./add-Users.py ../data/users/S"+seasonNbr+"_hashes_all_users.csv "+mySqlHost+" "+msiUserName+" "+dbPasswd+" "+mySqlSchema+" "+fullName+" > ../data/users/upload_log_S"+seasonNbr+".txt")
+print "New users added"
 
-# print "Transforming raw classifications into importable file"
-# os.chdir(scriptsPath)
-# os.system("./transform-ZooniverseClassifications.py "+snapshotFilePath+" ../data/zoon_classifications/S"+seasonNbr+"_trans.csv "+mySqlHost+" "+msiUserName+" "+dbPasswd+" "+mySqlSchema+" > ../data/zoon_classifications/log/log_S"+seasonNbr+".txt")
-# print "Transformed..."
+print "Transforming raw classifications into importable file"
+os.chdir(scriptsPath)
+os.system("./transform-ZooniverseClassifications.py "+snapshotFilePath+" ../data/zoon_classifications/S"+seasonNbr+"_trans.csv "+mySqlHost+" "+msiUserName+" "+dbPasswd+" "+mySqlSchema+" > ../data/zoon_classifications/log/log_S"+seasonNbr+".txt")
+print "Transformed..."
 
-# print "Uploading Zooniverse classifications to database"
-# os.chdir(scriptsPath)
-# os.system("./load-Links.py ../data/link_to_zoon_id/S"+seasonNbr+"_links.csv "+mySqlHost+" "+msiUserName+" "+dbPasswd+" "+mySqlSchema+" "+fullName+" > "  "../data/link_to_zoon_id/upload_log_S"+seasonNbr+".txt")
-# print "Uploaded"
+print "Uploading Zooniverse classifications to database"
+os.chdir(scriptsPath)
+os.system("./load-Links.py ../data/link_to_zoon_id/S"+seasonNbr+"_links.csv "+mySqlHost+" "+msiUserName+" "+dbPasswd+" "+mySqlSchema+" "+fullName+" > "  "../data/link_to_zoon_id/upload_log_S"+seasonNbr+".txt")
+print "Uploaded"
 
-# print "Uploading Consensus classifications to database"
-# os.chdir(scriptsPath)
-# os.system("./load-ConsensusClassifications.py ../data/consensus_classifications/season_"+seasonNbr+"_plurality.csv "+mySqlHost+" "+msiUserName+" "+dbPasswd+" "+mySqlSchema+" "+fullName+" > " "../data/consensus_classifications/upload_plurality_log_S"+seasonNbr+".txt")
-# print "Uploaded"
+print "Uploading Consensus classifications to database"
+os.chdir(scriptsPath)
+os.system("./load-ConsensusClassifications.py ../data/consensus_classifications/season_"+seasonNbr+"_plurality.csv "+mySqlHost+" "+msiUserName+" "+dbPasswd+" "+mySqlSchema+" "+fullName+" > " "../data/consensus_classifications/upload_plurality_log_S"+seasonNbr+".txt")
+print "Uploaded"
 
-# print "Uploading Blank classifications to database"
-# os.chdir(scriptsPath)
-# os.system("./load-ConsensusBlanks.py ../data/consensus_classifications/season_"+seasonNbr+"_blanks.csv "+mySqlHost+" "+msiUserName+" "+dbPasswd+" "+mySqlSchema+" "+fullName+" > " "../data/consensus_classifications/upload_blanks_log_S"+seasonNbr+".txt")
-# print "Uploaded"
+print "Uploading Blank classifications to database"
+os.chdir(scriptsPath)
+os.system("./load-ConsensusBlanks.py ../data/consensus_classifications/season_"+seasonNbr+"_blanks.csv "+mySqlHost+" "+msiUserName+" "+dbPasswd+" "+mySqlSchema+" "+fullName+" > " "../data/consensus_classifications/upload_blanks_log_S"+seasonNbr+".txt")
+print "Uploaded"
 
-# print "Generate final report"
-# os.chdir(sharedDir)
-# speciesCount(sharedDir+"/data/consensus_classifications/season_"+seasonNbr+"_plurality.csv",sharedDir+"/classifications_data/species_stats/season_"+seasonNbr+"_stats.csv")
-# print "Final report generated!"
+print "Generate final report"
+os.chdir(sharedDir)
+speciesCount(sharedDir+"/data/consensus_classifications/season_"+seasonNbr+"_plurality.csv",sharedDir+"/classifications_data/species_stats/season_"+seasonNbr+"_stats.csv")
+print "Final report generated!"
 
 #------------------------------------------------------------------------------------
